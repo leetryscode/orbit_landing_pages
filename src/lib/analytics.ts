@@ -13,9 +13,12 @@ export function trackPageView(path: string): void {
   }
 }
 
-export function trackEvent(eventName: string, properties?: Record<string, unknown>): void {
+export function trackEvent(
+  name: string,
+  props?: Record<string, unknown>
+): void {
   // TODO: Send event to analytics provider
   if (process.env.NODE_ENV === "development") {
-    console.log("[analytics] event:", eventName, properties);
+    console.log("[analytics] event:", name, props);
   }
 }

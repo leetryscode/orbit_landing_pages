@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { themeColor } from "@/brand/palette";
 
 export const viewport: Viewport = {
@@ -10,21 +9,21 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://orbit.app"),
-  title: "Orbit — Trusted introductions, without pressure",
+  title: "Orbit — Introductions replace algorithms",
   description:
-    "Orbit connects singles through people who know them. No swiping, no algorithms. Just trusted introductions.",
+    "Orbit brings trusted introductions into the present. Stewardship, not swiping.",
   openGraph: {
-    title: "Orbit — Trusted introductions, without pressure",
+    title: "Orbit — Introductions replace algorithms",
     description:
-      "Orbit connects singles through people who know them. No swiping, no algorithms. Just trusted introductions.",
+      "Orbit brings trusted introductions into the present. Stewardship, not swiping.",
     type: "website",
     images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Orbit — Trusted introductions, without pressure",
+    title: "Orbit — Introductions replace algorithms",
     description:
-      "Orbit connects singles through people who know them. No swiping, no algorithms. Just trusted introductions.",
+      "Orbit brings trusted introductions into the present. Stewardship, not swiping.",
     images: ["/og.png"],
   },
 };
@@ -38,8 +37,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-dvh flex flex-col bg-background-main text-text-dark font-sans antialiased">
         <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <main className="flex-1 flex flex-col">{children}</main>
       </body>
     </html>
   );

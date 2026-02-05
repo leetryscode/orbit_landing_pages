@@ -1,6 +1,6 @@
 # Orbit Landing Page
 
-Minimal marketing site for Orbit — trusted introductions, without pressure.
+Mobile-first vertical narrative landing site for Orbit. Introductions replace algorithms.
 
 ## Quick Start
 
@@ -27,27 +27,7 @@ NEXT_PUBLIC_INSTALL_URL=https://your-app-url.com/install
 
 **Option 2: Edit directly**
 
-Edit `src/config.ts` and replace the default value:
-
-```ts
-export const INSTALL_URL = "https://your-app-url.com/install";
-```
-
-## Brand Tokens (Copy from Main Orbit Codebase)
-
-To keep the landing page in sync with the main Orbit app:
-
-### Palette (colors)
-
-- **Source:** `MatchMakr_v0/src/config/palette.ts`
-- **Paste into:** `src/brand/palette.ts`
-- Copy the full `palette` object. The landing page uses `background.main`, `text.dark`, `text.light`, `action.primary`, `action.primary-hover`, `action.primary-active`, and `primary.blue` (for button text).
-
-### Typography (fonts)
-
-- **Source:** `MatchMakr_v0/tailwind.config.ts` (fontFamily) and `globals.css` (type-* classes)
-- **Paste into:** `src/brand/type.ts`
-- The main app uses Source Sans Pro and Bahnschrift. Add a Google Fonts import in `layout.tsx` or `globals.css` if switching from the default system stack.
+Edit `src/config.ts` and replace the default value. The fallback is `#` when not set.
 
 ## Deploy to Vercel
 
@@ -75,6 +55,6 @@ vercel
 Stub functions in `src/lib/analytics.ts`:
 
 - `trackPageView(path)` — call on route change
-- `trackEvent(name, properties)` — e.g. `trackEvent('install_click')`
+- `trackEvent(name, props)` — e.g. `trackEvent('install_click')`, `trackEvent('sponsor_click')`
 
-The "Install Orbit" button already calls `trackEvent('install_click')`. Replace the stubs with your analytics provider (Vercel Analytics, Plausible, PostHog, etc.).
+The "Install Orbit" and "Become a Sponsor" buttons already call these. Replace the stubs with your analytics provider (Vercel Analytics, Plausible, PostHog, etc.).

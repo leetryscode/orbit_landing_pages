@@ -16,13 +16,13 @@ export default function Button({
   className = "",
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-background-main";
+    "inline-flex items-center justify-center rounded-xl px-8 py-4 text-base font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-background-main";
 
   const variants = {
     primary:
       "bg-action-primary text-primary-blue hover:bg-action-primary-hover active:bg-action-primary-active shadow-subtle",
     secondary:
-      "bg-action-secondary text-text-dark hover:bg-action-secondary-hover border border-border-light",
+      "bg-transparent text-text-dark border-2 border-border-light hover:border-white/30",
   };
 
   const classes = `${base} ${variants[variant]} ${className}`.trim();

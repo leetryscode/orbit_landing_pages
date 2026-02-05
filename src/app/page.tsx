@@ -1,55 +1,95 @@
 "use client";
 
-import Link from "next/link";
-import Container from "@/components/Container";
-import Button from "@/components/Button";
+import { useRef } from "react";
+import StorySection from "@/components/StorySection";
+import SwipeUpAffordance from "@/components/SwipeUpAffordance";
 import { INSTALL_URL } from "@/config";
 import { trackEvent } from "@/lib/analytics";
 
+const NARRATIVE_1 = [
+  "Introductions replace algorithms.",
+  "Somewhere along the way, meeting people became a numbers game.",
+  "Speed replaced judgment. Scale replaced care.",
+  "Algorithms are good at scale. They are bad at meaning.",
+  "Before apps and feeds, meaningful relationships began with an introduction.",
+  "Orbit brings that practice into the present.",
+];
+
+const NARRATIVE_2 = [
+  "Stewardship, not swiping.",
+  "When you sponsor someone on Orbit, you're not choosing for yourself.",
+  "You're vouching for another person.",
+  "You're saying: I know them — and I stand behind them.",
+  "That's a different kind of responsibility.",
+  "And a different kind of trust.",
+];
+
 export default function HomePage() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   const handleInstallClick = () => {
     trackEvent("install_click");
   };
 
-  return (
-    <Container>
-      <div className="py-16 sm:py-24">
-        <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-text-dark max-w-2xl">
-          Trusted introductions, without pressure.
-        </h1>
-        <p className="mt-4 text-lg text-text-light max-w-xl">
-          Orbit connects singles through people who know them. No swiping, no
-          algorithms. Just trusted introductions.
-        </p>
+  const handleSponsorClick = () => {
+    trackEvent("sponsor_click");
+  };
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-4">
+  return (
+    <div
+      ref={scrollRef}
+      className="scroll-narrative h-[100svh] overflow-y-auto snap-y snap-mandatory bg-background-main"
+    >
+      {/* Narrative 1 */}
+      {NARRATIVE_1.map((line, i) => (
+        <StorySection
+          key={i}
+          text={line}
+          variant={i === 0 ? "headline" : "body"}
+        />
+      ))}
+
+      {/* CTA 1 */}
+      <StorySection variant="cta">
+        <div className="flex flex-col items-center gap-6">
           <a
             href={INSTALL_URL}
             onClick={handleInstallClick}
-            className="inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium bg-action-primary text-primary-blue hover:bg-action-primary-hover active:bg-action-primary-active shadow-subtle transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-background-main"
+            className="inline-flex items-center justify-center rounded-xl px-8 py-4 text-base font-medium bg-action-primary text-primary-blue hover:bg-action-primary-hover active:bg-action-primary-active shadow-subtle transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-background-main"
           >
             Install Orbit
           </a>
-          <Link
-            href="/contact"
-            className="text-sm text-text-light hover:text-text-dark transition-colors self-center sm:self-auto"
-          >
-            Contact
-          </Link>
+          <p className="text-text-light text-sm">Invite-only. Built slowly.</p>
         </div>
+      </StorySection>
 
-        <ul className="mt-16 space-y-4 max-w-lg">
-          <li className="text-text-dark">
-            Introductions from people who already know and trust you.
-          </li>
-          <li className="text-text-dark">
-            No public profiles. Your story stays between you and your sponsor.
-          </li>
-          <li className="text-text-dark">
-            Calm, private, and designed for real connection.
-          </li>
-        </ul>
+      {/* Narrative 2 */}
+      {NARRATIVE_2.map((line, i) => (
+        <StorySection
+          key={`n2-${i}`}
+          text={line}
+          variant={i === 0 ? "headline" : "body"}
+        />
+      ))}
+
+      {/* CTA 2 */}
+      <StorySection variant="cta">
+        <div className="flex flex-col items-center gap-6">
+          <a
+            href={INSTALL_URL}
+            onClick={handleSponsorClick}
+            className="inline-flex items-center justify-center rounded-xl px-8 py-4 text-base font-medium bg-action-primary text-primary-blue hover:bg-action-primary-hover active:bg-action-primary-active shadow-subtle transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-background-main"
+          >
+            Become a Sponsor
+          </a>
+          <p className="text-text-light text-sm">For people others already trust.</p>
+        </div>
+      </StorySection>
+
+      {/* Swipe up affordance - first section only */}
+      <div className="fixed bottom-0 left-0 right-0 pointer-events-none flex justify-center pt-20">
+        <SwipeUpAffordance scrollContainerRef={scrollRef} />
       </div>
-    </Container>
+    </div>
   );
 }

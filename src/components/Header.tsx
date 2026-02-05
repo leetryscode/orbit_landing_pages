@@ -1,27 +1,22 @@
 import Link from "next/link";
-import Container from "./Container";
 
 export default function Header() {
   return (
-    <header className="border-b border-border-light py-5">
-      <Container>
-        <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="text-lg font-medium tracking-wide text-text-dark hover:text-white transition-colors"
-          >
-            Orbit
-          </Link>
-          <nav>
-            <Link
-              href="/contact"
-              className="text-sm text-text-light hover:text-text-dark transition-colors"
-            >
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </Container>
+    <header className="fixed top-0 left-0 right-0 z-50 py-5 px-6 flex items-center justify-between bg-background-main/80 backdrop-blur-sm">
+      <Link
+        href="/"
+        className="text-base font-medium tracking-wide text-text-dark hover:text-white transition-colors"
+      >
+        Orbit
+      </Link>
+      <nav>
+        <Link
+          href="/contact"
+          className="text-sm text-text-light hover:text-text-dark transition-colors"
+        >
+          Contact
+        </Link>
+      </nav>
     </header>
   );
 }

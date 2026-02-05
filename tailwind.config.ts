@@ -10,7 +10,6 @@ const config: Config = {
     extend: {
       colors: {
         primary: palette.primary,
-        accent: palette.accent,
         background: palette.background,
         text: palette.text,
         border: palette.border,
@@ -18,12 +17,12 @@ const config: Config = {
       },
       fontFamily: {
         sans: [...fontStack],
-        // TODO: Add Orbit brand font when available.
-        // Main app uses: font-source-sans (Source Sans Pro), font-brand (Bahnschrift)
+      },
+      maxWidth: {
+        narrative: "34rem",
       },
       boxShadow: {
         subtle: "0 1px 3px rgba(0, 0, 0, 0.08)",
-        card: "0 4px 12px rgba(0, 0, 0, 0.06)",
       },
       borderRadius: {
         xl: "0.75rem",

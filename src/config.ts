@@ -1,9 +1,8 @@
 /**
  * Site configuration.
  *
- * Set INSTALL_URL to your app store / PWA install URL.
- * For local dev, use a placeholder; for production, set via env:
- * NEXT_PUBLIC_INSTALL_URL or replace this value.
+ * CTA buttons link to the Orbit PWA where users begin onboarding.
+ * Override via NEXT_PUBLIC_INSTALL_URL env var if needed.
  */
 export const INSTALL_URL =
-  process.env.NEXT_PUBLIC_INSTALL_URL ?? "https://orbit.app/install";
+  process.env.NEXT_PUBLIC_INSTALL_URL ?? "https://www.greenlightmatch.app";

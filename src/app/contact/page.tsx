@@ -2,30 +2,24 @@ import Container from "@/components/Container";
 
 export default function ContactPage() {
   return (
-    <Container>
-      <div className="py-16 sm:py-24">
+    <div className="flex-1 pt-24 pb-16 bg-background-main min-h-[100svh]">
+      <Container>
         <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-text-dark max-w-2xl">
           Contact
         </h1>
         <p className="mt-4 text-lg text-text-light max-w-xl">
-          Have a question or feedback? We&apos;d love to hear from you.
+          If you&apos;re building Orbit with us, say hello.
         </p>
 
         <div className="mt-12 space-y-6">
-          <div>
-            <a
-              href="mailto:hello@orbit.app"
-              className="text-text-dark hover:text-white transition-colors underline underline-offset-4"
-            >
-              hello@orbit.app
-            </a>
-          </div>
+          <a
+            href="mailto:hello@orbitintroductions.com"
+            className="text-text-dark hover:text-white transition-colors underline underline-offset-4"
+          >
+            hello@orbitintroductions.com
+          </a>
 
-          <p className="text-sm text-text-light">
-            We typically respond within 24–48 hours.
-          </p>
-
-          {/* Optional lightweight form UI - non-functional, layout only */}
+          {/* Optional simple form UI - non-functional, layout only */}
           <div className="mt-10 max-w-md space-y-4">
             <div>
               <label
@@ -80,7 +74,7 @@ export default function ContactPage() {
             </p>
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }
