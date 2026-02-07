@@ -43,29 +43,48 @@ body {
 /* Cadence reveal: staged line animation for slides 2, 3, 4, 6 */
 .cadence-hidden {
   opacity: 0;
-  transform: translateY(6px);
 }
 
 .cadence-reveal {
   opacity: 0;
-  transform: translateY(6px);
-  animation: cadence-reveal 480ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: cadence-reveal 1440ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes cadence-reveal {
   from {
     opacity: 0;
-    transform: translateY(6px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cadence-hidden,
   .cadence-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Fork cards: soft reveal after slide 6 */
+.fork-card-animate {
+  opacity: 0;
+  animation: fork-card-reveal 660ms ease-out forwards;
+}
+
+@keyframes fork-card-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fork-card-animate {
     animation: none;
     opacity: 1;
     transform: none;

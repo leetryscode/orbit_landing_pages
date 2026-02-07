@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import StorySection from "@/components/StorySection";
 import SwipeUpAffordance from "@/components/SwipeUpAffordance";
+import ForkCards from "@/components/ForkCards";
 
 const NARRATIVE_1 = [
   "Time is the only thing you can't get back —\nwhich is why it matters who you give it to.",
@@ -13,8 +14,13 @@ const NARRATIVE_1 = [
   "Orbit is simple.\n\nSome people are here to introduce someone they know.\nOthers are here to be introduced.",
 ];
 
+const INTRODUCER_NARRATIVE = ["(Introducer narrative TBD)"];
+
+const SINGLE_NARRATIVE = ["(Single narrative TBD)"];
+
 export default function HomePage() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [path, setPath] = useState<null | "introducer" | "single">(null);
 
   return (
     <div
@@ -27,8 +33,30 @@ export default function HomePage() {
           slideIndex={i + 1}
           text={line}
           variant={i === 0 ? "headline" : "body"}
+          boldPhrase={i === 3 ? "who know us" : undefined}
+          children={i === 5 ? <ForkCards onSelect={setPath} /> : undefined}
         />
       ))}
+
+      {path === "introducer" &&
+        INTRODUCER_NARRATIVE.map((line, i) => (
+          <StorySection
+            key={`intro-${i}`}
+            slideIndex={7 + i}
+            text={line}
+            variant="body"
+          />
+        ))}
+
+      {path === "single" &&
+        SINGLE_NARRATIVE.map((line, i) => (
+          <StorySection
+            key={`single-${i}`}
+            slideIndex={7 + i}
+            text={line}
+            variant="body"
+          />
+        ))}
 
       {/* Swipe up affordance - first section only */}
       <div className="fixed bottom-0 left-0 right-0 pointer-events-none flex justify-center pt-20">

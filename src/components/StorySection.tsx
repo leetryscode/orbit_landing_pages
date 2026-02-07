@@ -1,21 +1,34 @@
 "use client";
 
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, cloneElement, isValidElement, useEffect, useRef, useState } from "react";
 
 type StorySectionProps = {
   text?: string;
   variant?: "headline" | "body" | "cta";
   slideIndex?: number;
+  boldPhrase?: string;
   children?: ReactNode;
 };
+
+function renderWithBold(content: string, boldPhrase?: string): ReactNode {
+  if (!boldPhrase || !content.includes(boldPhrase)) return content;
+  const parts = content.split(boldPhrase);
+  return (
+    <>
+      {parts[0]}
+      <strong>{boldPhrase}</strong>
+      {parts[1]}
+    </>
+  );
+}
 
 /** Returns [line2DelayMs, line3DelayMs] or null if no staged reveal. Line 3 only for slide 6. */
 function getRevealConfig(slideIndex: number): number[] | null {
   if (slideIndex === 2 || slideIndex === 3 || slideIndex === 4) {
-    return [940, -1]; // line 2 at 940ms, no line 3
+    return [1400, -1]; // line 2 at 1400ms, no line 3
   }
   if (slideIndex === 6) {
-    return [940, 1880]; // line 2 at 940ms, line 3 at 1880ms (940 x 2)
+    return [1400, 3000]; // line 2 at 1400ms, line 3 at 3000ms
   }
   return null;
 }
@@ -24,6 +37,7 @@ export default function StorySection({
   text,
   variant = "body",
   slideIndex = 0,
+  boldPhrase,
   children,
 }: StorySectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -94,10 +108,23 @@ export default function StorySection({
   }
 
   if (!revealConfig || lines.length < 2 || prefersReducedMotion) {
+    const renderedChildren =
+      slideIndex === 6 &&
+      children &&
+      isValidElement(children)
+        ? cloneElement(children as React.ReactElement<{ isSlide6Active?: boolean; prefersReducedMotion?: boolean }>, {
+            isSlide6Active: isInView,
+            prefersReducedMotion,
+          })
+        : children;
     return (
       <section ref={sectionRef} className={base}>
-        <p className={`${lineClass} whitespace-pre-line`}>{text}</p>
-        {children}
+        <div className={slideIndex === 6 && children ? "-mt-3" : ""}>
+          <p className={`${lineClass} whitespace-pre-line`}>
+            {boldPhrase ? renderWithBold(text, boldPhrase) : text}
+          </p>
+        </div>
+        {renderedChildren}
       </section>
     );
   }
@@ -107,16 +134,26 @@ export default function StorySection({
   const line2Class = isInView ? "cadence-reveal" : "cadence-hidden";
   const line3Class = isInView ? "cadence-reveal" : "cadence-hidden";
 
+  const renderedChildren =
+    isSlide6 &&
+    children &&
+    isValidElement(children)
+      ? cloneElement(children as React.ReactElement<{ isSlide6Active?: boolean; prefersReducedMotion?: boolean }>, {
+          isSlide6Active: isInView,
+          prefersReducedMotion,
+        })
+      : children;
+
   return (
     <section ref={sectionRef} className={base}>
-      <div className={`${lineClass} flex flex-col gap-0`}>
-        <div>{lines[0]}</div>
+      <div className={`${lineClass} flex flex-col gap-0 ${isSlide6 && children ? "-mt-3" : ""}`}>
+        <div>{renderWithBold(lines[0], boldPhrase)}</div>
         {lines[1] && (
           <div
             className={isSlide6 ? `mt-4 ${line2Class}` : `mt-1 ${line2Class}`}
             style={isInView ? { animationDelay: `${delay2}ms` } : undefined}
           >
-            {lines[1]}
+            {renderWithBold(lines[1], boldPhrase)}
           </div>
         )}
         {isSlide6 && lines[2] !== undefined && (
@@ -124,11 +161,11 @@ export default function StorySection({
             className={`mt-1 ${line3Class}`}
             style={isInView ? { animationDelay: `${delay3}ms` } : undefined}
           >
-            {lines[2]}
+            {renderWithBold(lines[2], boldPhrase)}
           </div>
         )}
       </div>
-      {children}
+      {renderedChildren}
     </section>
   );
 }
