@@ -24,6 +24,7 @@ export default function HomePage() {
       {NARRATIVE_1.map((line, i) => (
         <StorySection
           key={i}
+          slideIndex={i + 1}
           text={line}
           variant={i === 0 ? "headline" : "body"}
         />
