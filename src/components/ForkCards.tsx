@@ -6,7 +6,7 @@ type Path = "introducer" | "single";
 
 type ForkCardsProps = {
   isSlide6Active?: boolean;
-  onSelect: (path: Path) => void;
+  onSelect: (path: Path, options?: { fromTap: boolean }) => void;
   prefersReducedMotion?: boolean;
 };
 
@@ -42,8 +42,8 @@ export default function ForkCards({
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
 
-  const handleSelect = (path: Path) => {
-    onSelectRef.current(path);
+  const handleSelect = (path: Path, fromTap = false) => {
+    onSelectRef.current(path, { fromTap });
     pendingPathRef.current = null;
   };
 
@@ -59,7 +59,7 @@ export default function ForkCards({
       if (deltaY > 10) {
         const path = pendingPathRef.current;
         pendingPathRef.current = null;
-        onSelectRef.current(path);
+        onSelectRef.current(path, { fromTap: false });
       }
     };
 
@@ -78,7 +78,7 @@ export default function ForkCards({
   }, []);
 
   const handleClick = (path: Path) => {
-    handleSelect(path);
+    handleSelect(path, true);
   };
 
   if (!cardsVisible) return null;
@@ -87,7 +87,7 @@ export default function ForkCards({
     <div className="w-full mt-8 flex gap-3">
       <button
         type="button"
-        className={`fork-card flex-1 rounded-xl border border-border-light bg-background-card/80 px-5 py-6 text-left text-base font-light text-text-dark transition-colors hover:bg-background-card focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main ${
+        className={`fork-card flex-1 rounded-xl border border-border-light bg-background-card/80 px-5 py-6 text-center text-base font-light text-text-dark transition-colors hover:bg-background-card focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main ${
           prefersReducedMotion ? "" : "fork-card-animate"
         }`}
         onClick={() => handleClick("introducer")}
@@ -97,7 +97,7 @@ export default function ForkCards({
       </button>
       <button
         type="button"
-        className={`fork-card flex-1 rounded-xl border border-border-light bg-background-card/80 px-5 py-6 text-left text-base font-light text-text-dark transition-colors hover:bg-background-card focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main ${
+        className={`fork-card flex-1 rounded-xl border border-border-light bg-background-card/80 px-5 py-6 text-center text-base font-light text-text-dark transition-colors hover:bg-background-card focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main ${
           prefersReducedMotion ? "" : "fork-card-animate"
         }`}
         onClick={() => handleClick("single")}

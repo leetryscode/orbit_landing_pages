@@ -119,7 +119,7 @@ export default function StorySection({
         : children;
     return (
       <section ref={sectionRef} className={base}>
-        <div className={slideIndex === 6 && children ? "-mt-3" : ""}>
+        <div>
           <p className={`${lineClass} whitespace-pre-line`}>
             {boldPhrase ? renderWithBold(text, boldPhrase) : text}
           </p>
@@ -146,7 +146,7 @@ export default function StorySection({
 
   return (
     <section ref={sectionRef} className={base}>
-      <div className={`${lineClass} flex flex-col gap-0 ${isSlide6 && children ? "-mt-3" : ""}`}>
+      <div className={`${lineClass} flex flex-col gap-0`}>
         <div>{renderWithBold(lines[0], boldPhrase)}</div>
         {lines[1] && (
           <div

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StorySection from "@/components/StorySection";
 import SwipeUpAffordance from "@/components/SwipeUpAffordance";
 import ForkCards from "@/components/ForkCards";
@@ -20,7 +20,25 @@ const SINGLE_NARRATIVE = ["(Single narrative TBD)"];
 
 export default function HomePage() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const branchTargetRef = useRef<HTMLDivElement>(null);
   const [path, setPath] = useState<null | "introducer" | "single">(null);
+  const [scrollToNarrative, setScrollToNarrative] = useState(false);
+
+  const handleForkSelect = (selectedPath: "introducer" | "single", options?: { fromTap: boolean }) => {
+    setPath(selectedPath);
+    if (options?.fromTap) {
+      setScrollToNarrative(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!path || !scrollToNarrative || !branchTargetRef.current || !scrollRef.current) return;
+    setScrollToNarrative(false);
+    const el = branchTargetRef.current;
+    requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [path, scrollToNarrative]);
 
   return (
     <div
@@ -34,29 +52,33 @@ export default function HomePage() {
           text={line}
           variant={i === 0 ? "headline" : "body"}
           boldPhrase={i === 3 ? "who know us" : undefined}
-          children={i === 5 ? <ForkCards onSelect={setPath} /> : undefined}
+          children={i === 5 ? <ForkCards onSelect={handleForkSelect} /> : undefined}
         />
       ))}
 
-      {path === "introducer" &&
-        INTRODUCER_NARRATIVE.map((line, i) => (
-          <StorySection
-            key={`intro-${i}`}
-            slideIndex={7 + i}
-            text={line}
-            variant="body"
-          />
-        ))}
+      {path && (
+        <div ref={branchTargetRef}>
+          {path === "introducer" &&
+            INTRODUCER_NARRATIVE.map((line, i) => (
+              <StorySection
+                key={`intro-${i}`}
+                slideIndex={7 + i}
+                text={line}
+                variant="body"
+              />
+            ))}
 
-      {path === "single" &&
-        SINGLE_NARRATIVE.map((line, i) => (
-          <StorySection
-            key={`single-${i}`}
-            slideIndex={7 + i}
-            text={line}
-            variant="body"
-          />
-        ))}
+          {path === "single" &&
+            SINGLE_NARRATIVE.map((line, i) => (
+              <StorySection
+                key={`single-${i}`}
+                slideIndex={7 + i}
+                text={line}
+                variant="body"
+              />
+            ))}
+        </div>
+      )}
 
       {/* Swipe up affordance - first section only */}
       <div className="fixed bottom-0 left-0 right-0 pointer-events-none flex justify-center pt-20">
