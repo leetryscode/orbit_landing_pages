@@ -22,12 +22,12 @@ function renderWithBold(content: string, boldPhrase?: string): ReactNode {
   );
 }
 
-/** Returns [line2DelayMs, line3DelayMs] or null if no staged reveal. Line 3 only for slide 6. */
+/** Returns [line2DelayMs, line3DelayMs] or null if no staged reveal. Line 3 only for slide 5. */
 function getRevealConfig(slideIndex: number): number[] | null {
   if (slideIndex === 2 || slideIndex === 3 || slideIndex === 4) {
     return [1400, -1]; // line 2 at 1400ms, no line 3
   }
-  if (slideIndex === 6) {
+  if (slideIndex === 5) {
     return [1400, 3000]; // line 2 at 1400ms, line 3 at 3000ms
   }
   return null;
@@ -48,7 +48,7 @@ export default function StorySection({
 
   const lines = (() => {
     if (!text) return [];
-    if (slideIndex === 6) {
+    if (slideIndex === 5) {
       const parts = text.split(/\n\n+/);
       const line1 = parts[0] ?? "";
       const rest = parts[1] ? parts[1].split(/\n/).filter((s) => s.length > 0) : [];
@@ -109,7 +109,7 @@ export default function StorySection({
 
   if (!revealConfig || lines.length < 2 || prefersReducedMotion) {
     const renderedChildren =
-      slideIndex === 6 &&
+      slideIndex === 5 &&
       children &&
       isValidElement(children)
         ? cloneElement(children as React.ReactElement<{ isSlide6Active?: boolean; prefersReducedMotion?: boolean }>, {
@@ -130,12 +130,12 @@ export default function StorySection({
   }
 
   const [delay2, delay3] = revealConfig;
-  const isSlide6 = slideIndex === 6;
+  const isSlide5 = slideIndex === 5;
   const line2Class = isInView ? "cadence-reveal" : "cadence-hidden";
   const line3Class = isInView ? "cadence-reveal" : "cadence-hidden";
 
   const renderedChildren =
-    isSlide6 &&
+    isSlide5 &&
     children &&
     isValidElement(children)
       ? cloneElement(children as React.ReactElement<{ isSlide6Active?: boolean; prefersReducedMotion?: boolean }>, {
@@ -150,13 +150,13 @@ export default function StorySection({
         <div>{renderWithBold(lines[0], boldPhrase)}</div>
         {lines[1] && (
           <div
-            className={isSlide6 ? `mt-4 ${line2Class}` : `mt-1 ${line2Class}`}
+            className={isSlide5 ? `mt-4 ${line2Class}` : `mt-1 ${line2Class}`}
             style={isInView ? { animationDelay: `${delay2}ms` } : undefined}
           >
             {renderWithBold(lines[1], boldPhrase)}
           </div>
         )}
-        {isSlide6 && lines[2] !== undefined && (
+        {isSlide5 && lines[2] !== undefined && (
           <div
             className={`mt-1 ${line3Class}`}
             style={isInView ? { animationDelay: `${delay3}ms` } : undefined}

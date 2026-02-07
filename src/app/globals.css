@@ -68,7 +68,7 @@ body {
   }
 }
 
-/* Fork cards: soft reveal after slide 6 */
+/* Fork cards: soft reveal after slide 5 */
 .fork-card-animate {
   opacity: 0;
   animation: fork-card-reveal 660ms ease-out forwards;

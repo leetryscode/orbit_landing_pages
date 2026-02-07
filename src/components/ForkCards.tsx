@@ -10,7 +10,7 @@ type ForkCardsProps = {
   prefersReducedMotion?: boolean;
 };
 
-const CARD_DELAY_MS = 4000; // cards appear 4000ms after slide 6 becomes active
+const CARD_DELAY_MS = 4000; // cards appear 4000ms after slide 5 becomes active
 
 export default function ForkCards({
   isSlide6Active = false,
@@ -81,14 +81,15 @@ export default function ForkCards({
     handleSelect(path, true);
   };
 
-  if (!cardsVisible) return null;
-
   return (
-    <div className="w-full mt-8 flex gap-3">
+    <div
+      className={`w-full mt-8 flex gap-3 ${!cardsVisible ? "opacity-0 pointer-events-none" : ""}`}
+      aria-hidden={!cardsVisible}
+    >
       <button
         type="button"
         className={`fork-card flex-1 rounded-xl border border-border-light bg-background-card/80 px-5 py-6 text-center text-base font-light text-text-dark transition-colors hover:bg-background-card focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main ${
-          prefersReducedMotion ? "" : "fork-card-animate"
+          cardsVisible && (prefersReducedMotion ? "" : "fork-card-animate")
         }`}
         onClick={() => handleClick("introducer")}
         onPointerDown={(e) => handlePointerDown("introducer", e)}
@@ -98,7 +99,7 @@ export default function ForkCards({
       <button
         type="button"
         className={`fork-card flex-1 rounded-xl border border-border-light bg-background-card/80 px-5 py-6 text-center text-base font-light text-text-dark transition-colors hover:bg-background-card focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main ${
-          prefersReducedMotion ? "" : "fork-card-animate"
+          cardsVisible && (prefersReducedMotion ? "" : "fork-card-animate")
         }`}
         onClick={() => handleClick("single")}
         onPointerDown={(e) => handlePointerDown("single", e)}
