@@ -15,7 +15,20 @@ const NARRATIVE_1 = [
 
 const INTRODUCER_NARRATIVE = ["(Introducer narrative TBD)"];
 
-const SINGLE_NARRATIVE = ["(Single narrative TBD)"];
+const SINGLE_NARRATIVE = [
+  "You don't have to sell yourself on Orbit.\nSomeone who knows you makes the introduction.",
+  "You were worth introducing.\nAnd the person you're meeting was, too.",
+  "You don't have to build or optimize a profile.\nSomeone who knows you represents you thoughtfully.",
+  "You're not presented to strangers.\nYou're shared through trusted relationships.",
+  "Your profile isn't a performance.\nIt's handled by someone who actually knows you.",
+  "Orbit is for people who value intention over attention.\nIf that sounds like you, Orbit is for you.",
+];
+
+const SINGLE_CTAS: { primary: string; subtext?: string }[] = [
+  { primary: "Apply to the waitlist" },
+  { primary: "More on how Orbit works" },
+  { primary: "I am interested in becoming a Sponsor and introducing someone" },
+];
 
 export default function HomePage() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -28,6 +41,11 @@ export default function HomePage() {
     if (options?.fromTap) {
       setScrollToNarrative(true);
     }
+  };
+
+  const handleSponsorClick = () => {
+    setPath("introducer");
+    setScrollToNarrative(true);
   };
 
   useEffect(() => {
@@ -74,6 +92,40 @@ export default function HomePage() {
                 slideIndex={6 + i}
                 text={line}
                 variant="body"
+                children={
+                  i === 5 ? (
+                    <div className="w-full mt-8 flex flex-col gap-3">
+                      {SINGLE_CTAS.map((cta, ctaIndex) => {
+                        const baseClasses = `w-full rounded-xl border px-5 py-6 text-center text-base font-light ${
+                          ctaIndex === 0
+                            ? "bg-white text-[#566B89] border-white"
+                            : "border-border-light bg-background-card/80 text-text-dark"
+                        }`;
+                        const isSponsorButton = ctaIndex === 2;
+
+                        return isSponsorButton ? (
+                          <button
+                            key={cta.primary}
+                            type="button"
+                            onClick={handleSponsorClick}
+                            className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
+                          >
+                            {cta.primary}
+                          </button>
+                        ) : (
+                          <div key={cta.primary} className={baseClasses}>
+                            <div>{cta.primary}</div>
+                            {cta.subtext && (
+                              <div className="mt-2 text-sm text-text-light font-light">
+                                {cta.subtext}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : undefined
+                }
               />
             ))}
         </div>
