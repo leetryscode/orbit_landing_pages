@@ -92,8 +92,10 @@ export default function StorySection({
   const base = "min-h-[100svh] flex flex-col items-start justify-center px-6 py-16 snap-start snap-always";
 
   const textSizes = {
-    headline: "text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-text-dark leading-[1.3] max-w-narrative text-left",
-    body: "text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-text-dark leading-[1.4] max-w-narrative text-left",
+    headline:
+      "text-[clamp(28px,6vw,42px)] font-light tracking-tight text-text-dark leading-[1.15] max-w-[22ch] text-left break-words [text-wrap:balance]",
+    body:
+      "text-[clamp(28px,6vw,42px)] font-light tracking-tight text-text-dark leading-[1.15] max-w-[22ch] text-left break-words [text-wrap:balance]",
     cta: "max-w-narrative text-left",
   };
 
