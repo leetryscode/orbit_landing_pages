@@ -121,10 +121,10 @@ export default function StorySection({
         : children;
     return (
       <section ref={sectionRef} className={base}>
-        <div>
-          <p className={`${lineClass} whitespace-pre-line`}>
-            {boldPhrase ? renderWithBold(text, boldPhrase) : text}
-          </p>
+        <div className={`${lineClass} flex flex-col gap-6`}>
+          {text.split(/\n/).filter((s) => s.length > 0).map((line, i) => (
+            <span key={i}>{boldPhrase ? renderWithBold(line, boldPhrase) : line}</span>
+          ))}
         </div>
         {renderedChildren}
       </section>
@@ -152,7 +152,7 @@ export default function StorySection({
         <div>{renderWithBold(lines[0], boldPhrase)}</div>
         {lines[1] && (
           <div
-            className={isSlide5 ? `mt-4 ${line2Class}` : `mt-1 ${line2Class}`}
+            className={isSlide5 ? `mt-6 ${line2Class}` : `mt-6 ${line2Class}`}
             style={isInView ? { animationDelay: `${delay2}ms` } : undefined}
           >
             {renderWithBold(lines[1], boldPhrase)}
@@ -160,7 +160,7 @@ export default function StorySection({
         )}
         {isSlide5 && lines[2] !== undefined && (
           <div
-            className={`mt-1 ${line3Class}`}
+            className={`mt-6 ${line3Class}`}
             style={isInView ? { animationDelay: `${delay3}ms` } : undefined}
           >
             {renderWithBold(lines[2], boldPhrase)}
