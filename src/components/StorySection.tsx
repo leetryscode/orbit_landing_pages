@@ -22,15 +22,15 @@ function renderWithBold(content: string, boldPhrase?: string): ReactNode {
   );
 }
 
-/** Returns [line2DelayMs, line3DelayMs] or null if no staged reveal. Line 3 only for slide 5. */
+/** Returns [line2DelayMs, line3DelayMs] or null if no staged reveal. Animation only for pre-split slides 2–7. */
 function getRevealConfig(slideIndex: number): number[] | null {
-  if (slideIndex === 2 || slideIndex === 3 || slideIndex === 4) {
+  if (slideIndex === 2 || slideIndex === 3 || slideIndex === 4 || slideIndex === 6 || slideIndex === 7) {
     return [1400, -1]; // line 2 at 1400ms, no line 3
   }
   if (slideIndex === 5) {
     return [1400, 3000]; // line 2 at 1400ms, line 3 at 3000ms
   }
-  return null;
+  return null; // slide 8 (fork) and post-split: no animation
 }
 
 export default function StorySection({
@@ -48,7 +48,7 @@ export default function StorySection({
 
   const lines = (() => {
     if (!text) return [];
-    if (slideIndex === 5) {
+    if (slideIndex === 7) {
       const parts = text.split(/\n\n+/);
       const line1 = parts[0] ?? "";
       const rest = parts[1] ? parts[1].split(/\n/).filter((s) => s.length > 0) : [];
@@ -111,7 +111,7 @@ export default function StorySection({
 
   if (!revealConfig || lines.length < 2 || prefersReducedMotion) {
     const renderedChildren =
-      slideIndex === 5 &&
+      slideIndex === 8 &&
       children &&
       isValidElement(children)
         ? cloneElement(children as React.ReactElement<{ isSlide6Active?: boolean; prefersReducedMotion?: boolean }>, {
@@ -132,12 +132,13 @@ export default function StorySection({
   }
 
   const [delay2, delay3] = revealConfig;
-  const isSlide5 = slideIndex === 5;
+  const isForkSlide = slideIndex === 8;
+  const hasThirdLine = delay3 > 0 && lines[2] !== undefined;
   const line2Class = isInView ? "cadence-reveal" : "cadence-hidden";
   const line3Class = isInView ? "cadence-reveal" : "cadence-hidden";
 
   const renderedChildren =
-    isSlide5 &&
+    isForkSlide &&
     children &&
     isValidElement(children)
       ? cloneElement(children as React.ReactElement<{ isSlide6Active?: boolean; prefersReducedMotion?: boolean }>, {
@@ -149,16 +150,18 @@ export default function StorySection({
   return (
     <section ref={sectionRef} className={base}>
       <div className={`${lineClass} flex flex-col gap-0`}>
-        <div>{renderWithBold(lines[0], boldPhrase)}</div>
+        <div className={lines[0].includes("\n") ? "whitespace-pre-line" : ""}>
+          {renderWithBold(lines[0], boldPhrase)}
+        </div>
         {lines[1] && (
           <div
-            className={isSlide5 ? `mt-6 ${line2Class}` : `mt-6 ${line2Class}`}
+            className={`mt-6 ${line2Class}`}
             style={isInView ? { animationDelay: `${delay2}ms` } : undefined}
           >
             {renderWithBold(lines[1], boldPhrase)}
           </div>
         )}
-        {isSlide5 && lines[2] !== undefined && (
+        {hasThirdLine && (
           <div
             className={`mt-6 ${line3Class}`}
             style={isInView ? { animationDelay: `${delay3}ms` } : undefined}

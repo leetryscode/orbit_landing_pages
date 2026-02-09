@@ -10,7 +10,10 @@ const NARRATIVE_1 = [
   "We're careful with our time.\nEspecially when it comes to people.",
   "Most people don't struggle to meet people.\nThey struggle to meet the right people.",
   "The right people are rarely random.\nThey come from people who know us.",
-  "Orbit is a place for thoughtful introductions.\n\nSome people are here to introduce someone they know.\nOthers are here to be introduced.",
+  "Swipe culture didn't just change dating.\nIt changed how people value themselves —\nand how they evaluate others.",
+  "Attention without intention.\nVolume mistaken for opportunity.",
+  "When everyone is one swipe away,\nno one feels seriously considered.\n\nThat's what Orbit is built to change.",
+  "Orbit is a place for thoughtful introductions.\nSome people are here to introduce someone they know.\nOthers are here to be introduced.\nChoose the role that fits you.",
 ];
 
 const INTRODUCER_NARRATIVE = ["(Introducer narrative TBD)"];
@@ -69,7 +72,7 @@ export default function HomePage() {
           text={line}
           variant={i === 0 ? "headline" : "body"}
           boldPhrase={i === 3 ? "who know us" : undefined}
-          children={i === 4 ? <ForkCards onSelect={handleForkSelect} /> : undefined}
+          children={i === 7 ? <ForkCards onSelect={handleForkSelect} /> : undefined}
         />
       ))}
 
@@ -79,7 +82,7 @@ export default function HomePage() {
             INTRODUCER_NARRATIVE.map((line, i) => (
               <StorySection
                 key={`intro-${i}`}
-                slideIndex={6 + i}
+                slideIndex={9 + i}
                 text={line}
                 variant="body"
               />
@@ -89,7 +92,7 @@ export default function HomePage() {
             SINGLE_NARRATIVE.map((line, i) => (
               <StorySection
                 key={`single-${i}`}
-                slideIndex={6 + i}
+                slideIndex={9 + i}
                 text={line}
                 variant="body"
                 children={
