@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import StorySection from "@/components/StorySection";
 import SwipeUpAffordance from "@/components/SwipeUpAffordance";
 import ForkCards from "@/components/ForkCards";
@@ -35,7 +36,7 @@ const SPONSOR_CTAS: { primary: string; subtext?: string }[] = [
 
 const SINGLE_NARRATIVE = [
   "You don't have to sell yourself on Orbit.\nSomeone who knows you makes the introduction.",
-  "You were worth introducing.\nAnd the person you're meeting was, too.",
+  "You are worth introducing.\nAnd the person you're meeting is, too.",
   "You don't have to build or optimize a profile.\nSomeone who knows you represents you thoughtfully.",
   "You're not presented to strangers.\nYou're shared through trusted relationships.",
   "Your profile isn't a performance.\nIt's handled by someone who actually knows you.",
@@ -49,6 +50,7 @@ const SINGLE_CTAS: { primary: string; subtext?: string }[] = [
 ];
 
 export default function HomePage() {
+  const router = useRouter();
   const scrollRef = useRef<HTMLDivElement>(null);
   const branchTargetRef = useRef<HTMLDivElement>(null);
   const [path, setPath] = useState<null | "introducer" | "single">(null);
@@ -73,6 +75,10 @@ export default function HomePage() {
 
   const handleApplyClick = () => {
     window.location.href = INSTALL_URL;
+  };
+
+  const handleMoreInfoClick = () => {
+    router.push("/more");
   };
 
   useEffect(() => {
@@ -120,6 +126,7 @@ export default function HomePage() {
                         }`;
                         const isApplyButton = ctaIndex === 0;
                         const isSingleButton = ctaIndex === 1;
+                        const isMoreInfoButton = ctaIndex === 2;
 
                         if (isApplyButton) {
                           return (
@@ -140,6 +147,19 @@ export default function HomePage() {
                               key={cta.primary}
                               type="button"
                               onClick={handleSingleClick}
+                              className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
+                            >
+                              {cta.primary}
+                            </button>
+                          );
+                        }
+
+                        if (isMoreInfoButton) {
+                          return (
+                            <button
+                              key={cta.primary}
+                              type="button"
+                              onClick={handleMoreInfoClick}
                               className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
                             >
                               {cta.primary}
@@ -181,6 +201,7 @@ export default function HomePage() {
                             : "border-border-light bg-background-card/80 text-text-dark"
                         }`;
                         const isApplyButton = ctaIndex === 0;
+                        const isMoreInfoButton = ctaIndex === 1;
                         const isSponsorButton = ctaIndex === 2;
 
                         if (isApplyButton) {
@@ -189,6 +210,19 @@ export default function HomePage() {
                               key={cta.primary}
                               type="button"
                               onClick={handleApplyClick}
+                              className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
+                            >
+                              {cta.primary}
+                            </button>
+                          );
+                        }
+
+                        if (isMoreInfoButton) {
+                          return (
+                            <button
+                              key={cta.primary}
+                              type="button"
+                              onClick={handleMoreInfoClick}
                               className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
                             >
                               {cta.primary}
