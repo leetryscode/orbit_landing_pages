@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import StorySection from "@/components/StorySection";
 import SwipeUpAffordance from "@/components/SwipeUpAffordance";
 import ForkCards from "@/components/ForkCards";
+import { INSTALL_URL } from "@/config";
 
 const NARRATIVE_1 = [
   "Time is the only thing you can't get back —\nwhich is why it matters who you give it to.",
@@ -16,7 +17,21 @@ const NARRATIVE_1 = [
   "Orbit is a place for thoughtful introductions.\nSome people are here to introduce someone they know.\nOthers are here to be introduced.\nChoose the role that fits you.",
 ];
 
-const INTRODUCER_NARRATIVE = ["(Introducer narrative TBD)"];
+const SPONSOR_NARRATIVE = [
+  "You already know someone worth introducing.\nYour have awesome friends, why do they struggle to find quality relationships?",
+  "The truth is, it's crazy out there\nAnd it's not just the people.  It's the way people find people",
+  "What used to happen through friends and family\nbecame something you do alone, at scale.",
+  "As a part of the Orbit community\nyou join a network of fellow Sponsors",
+  "These Sponsors are the only way introductions happen on Orbit.\nSponsors never message singles.",
+  "You coordinate with other sponsors, people who know their singles well,\nwho can speak honestly, and advocate without sugarcoating.",
+  "Good introductions change lives.\nBad one's waste years.",
+];
+
+const SPONSOR_CTAS: { primary: string; subtext?: string }[] = [
+  { primary: "Apply to become a sponsor" },
+  { primary: "Explore being a single" },
+  { primary: "More about the orbit app" },
+];
 
 const SINGLE_NARRATIVE = [
   "You don't have to sell yourself on Orbit.\nSomeone who knows you makes the introduction.",
@@ -51,6 +66,15 @@ export default function HomePage() {
     setScrollToNarrative(true);
   };
 
+  const handleSingleClick = () => {
+    setPath("single");
+    setScrollToNarrative(true);
+  };
+
+  const handleApplyClick = () => {
+    window.location.href = INSTALL_URL;
+  };
+
   useEffect(() => {
     if (!path || !scrollToNarrative || !branchTargetRef.current || !scrollRef.current) return;
     setScrollToNarrative(false);
@@ -79,12 +103,64 @@ export default function HomePage() {
       {path && (
         <div ref={branchTargetRef}>
           {path === "introducer" &&
-            INTRODUCER_NARRATIVE.map((line, i) => (
+            SPONSOR_NARRATIVE.map((line, i) => (
               <StorySection
-                key={`intro-${i}`}
+                key={`sponsor-${i}`}
                 slideIndex={9 + i}
                 text={line}
                 variant="body"
+                children={
+                  i === 6 ? (
+                    <div className="w-full mt-8 flex flex-col gap-3">
+                      {SPONSOR_CTAS.map((cta, ctaIndex) => {
+                        const baseClasses = `w-full rounded-xl border px-5 py-6 text-center text-base font-light ${
+                          ctaIndex === 0
+                            ? "bg-white text-[#566B89] border-white"
+                            : "border-border-light bg-background-card/80 text-text-dark"
+                        }`;
+                        const isApplyButton = ctaIndex === 0;
+                        const isSingleButton = ctaIndex === 1;
+
+                        if (isApplyButton) {
+                          return (
+                            <button
+                              key={cta.primary}
+                              type="button"
+                              onClick={handleApplyClick}
+                              className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
+                            >
+                              {cta.primary}
+                            </button>
+                          );
+                        }
+
+                        if (isSingleButton) {
+                          return (
+                            <button
+                              key={cta.primary}
+                              type="button"
+                              onClick={handleSingleClick}
+                              className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
+                            >
+                              {cta.primary}
+                            </button>
+                          );
+                        }
+
+                        return (
+                          <div key={cta.primary} className={baseClasses}>
+                            <div>{cta.primary}</div>
+                            {cta.subtext && (
+                              <div className="mt-2 text-sm text-text-light font-light">
+                                {cta.subtext}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : undefined
+                }
               />
             ))}
 
@@ -104,18 +180,36 @@ export default function HomePage() {
                             ? "bg-white text-[#566B89] border-white"
                             : "border-border-light bg-background-card/80 text-text-dark"
                         }`;
+                        const isApplyButton = ctaIndex === 0;
                         const isSponsorButton = ctaIndex === 2;
 
-                        return isSponsorButton ? (
-                          <button
-                            key={cta.primary}
-                            type="button"
-                            onClick={handleSponsorClick}
-                            className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
-                          >
-                            {cta.primary}
-                          </button>
-                        ) : (
+                        if (isApplyButton) {
+                          return (
+                            <button
+                              key={cta.primary}
+                              type="button"
+                              onClick={handleApplyClick}
+                              className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
+                            >
+                              {cta.primary}
+                            </button>
+                          );
+                        }
+
+                        if (isSponsorButton) {
+                          return (
+                            <button
+                              key={cta.primary}
+                              type="button"
+                              onClick={handleSponsorClick}
+                              className={`${baseClasses} transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-background-main`}
+                            >
+                              {cta.primary}
+                            </button>
+                          );
+                        }
+
+                        return (
                           <div key={cta.primary} className={baseClasses}>
                             <div>{cta.primary}</div>
                             {cta.subtext && (
