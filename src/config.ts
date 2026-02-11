@@ -5,4 +5,4 @@
  * Override via NEXT_PUBLIC_INSTALL_URL env var if needed.
  */
 export const INSTALL_URL =
-  process.env.NEXT_PUBLIC_INSTALL_URL ?? "https://www.greenlightmatch.app";
+  process.env.NEXT_PUBLIC_INSTALL_URL ?? "https://orbitintroductions.app";
