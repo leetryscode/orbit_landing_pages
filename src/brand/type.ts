@@ -14,13 +14,12 @@
  * Current: system-ui stack for minimal setup. Orbit app uses Source Sans Pro + Bahnschrift.
  */
 
-/** Font stack - modern, readable. Swap for Orbit brand font when available. */
+/** Orbit brand font — Source Sans Pro (matches main app). */
 export const fontStack = [
-  'system-ui',
+  'Source Sans Pro',
   '-apple-system',
   'BlinkMacSystemFont',
   'Segoe UI',
-  'Roboto',
   'sans-serif',
 ] as const;
 

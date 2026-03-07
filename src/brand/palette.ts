@@ -1,28 +1,29 @@
 /**
- * Orbit Brand Palette - Single Source of Truth
+ * Orbit Brand Palette — Navy Classic
  *
- * COPY FROM MAIN ORBIT CODEBASE:
- * - Main app: MatchMakr_v0/src/config/palette.ts
- * - Synced with Orbit (Pearl + Ink): blue-grey canvas, white text, white CTA buttons.
+ * Matches MatchMakr_v0 navy-classic theme:
+ * - globals.css :root / data-theme="navy-classic"
+ * - Deep navy canvas (#0C1F35), light text, white CTA
  */
 
 export const palette = {
   primary: {
-    blue: "#344B63",
+    blue: "#0C1F35", // canvas
     teal: "#2F7F86",
     "blue-light": "#8E9AA9",
     "teal-light": "#AFCFD1",
   },
   background: {
-    main: "#566B89",
-    card: "#5F7696",
+    main: "#0C1F35", // orbit-canvas
+    card: "#1E3A5C", // orbit-surface-2
   },
   text: {
-    dark: "#F6F8FC",
-    light: "#C9D3E2",
+    dark: "#F2F4F7", // orbit-text
+    light: "#C7D2E0", // orbit-text-2
+    muted: "#8FA3BA", // orbit-muted
   },
   border: {
-    light: "rgba(255, 255, 255, 0.14)",
+    light: "rgba(55, 86, 120, 0.8)", // orbit-border
   },
   action: {
     primary: "#FFFFFF",
@@ -31,5 +32,5 @@ export const palette = {
   },
 } as const;
 
-export const themeColor = palette.primary.blue;
+export const themeColor = palette.background.main;
 export const backgroundColor = palette.background.main;

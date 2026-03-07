@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { themeColor } from "@/brand/palette";
 
 export const viewport: Viewport = {
@@ -9,21 +9,21 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://orbit.app"),
-  title: "Orbit — Introductions replace algorithms",
+  title: "Orbit — A different kind of dating app",
   description:
-    "Orbit brings trusted introductions into the present. Stewardship, not swiping.",
+    "Friends introduce friends. Orbit is a different kind of dating app.",
   openGraph: {
-    title: "Orbit — Introductions replace algorithms",
+    title: "Orbit — A different kind of dating app",
     description:
-      "Orbit brings trusted introductions into the present. Stewardship, not swiping.",
+      "Friends introduce friends. Orbit is a different kind of dating app.",
     type: "website",
     images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Orbit — Introductions replace algorithms",
+    title: "Orbit — A different kind of dating app",
     description:
-      "Orbit brings trusted introductions into the present. Stewardship, not swiping.",
+      "Friends introduce friends. Orbit is a different kind of dating app.",
     images: ["/og.png"],
   },
 };
@@ -36,8 +36,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-dvh flex flex-col bg-background-main text-text-dark font-sans antialiased">
-        <Header />
         <main className="flex-1 flex flex-col">{children}</main>
+        <Footer />
       </body>
     </html>
   );

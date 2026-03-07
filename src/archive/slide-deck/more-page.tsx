@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import StorySection from "@/components/StorySection";
-import SwipeUpAffordance from "@/components/SwipeUpAffordance";
+import StorySection from "./StorySection";
+import SwipeUpAffordance from "./SwipeUpAffordance";
 import { INSTALL_URL } from "@/config";
 
 const MORE_INFO_NARRATIVE = [
