@@ -6,8 +6,7 @@ const NARRATIVE = [
   "Instead of singles swiping through strangers, friends introduce friends.",
   "On most apps, you build your own profile and try to guess chemistry from photos and prompts. On Orbit, sponsors represent the singles they know. They create the profile, talk with other sponsors, and when both think it's a good fit, an introduction is made.",
   "Singles aren't browsing the entire city. They're meeting someone who was thoughtfully introduced — with someone vouching for both sides.",
-  "The idea started simply.",
-  "One night my wife came home excited because she had found a date for a friend of mine. Not through an app, but through a conversation with her friends about their friends.",
+  "The idea started simply. One night my wife came home excited because she had found a date for a friend of mine. Not through an app, but through a conversation with her friends about their friends.",
   "They compared notes, talked about what each person was like, and decided to set them up.",
   "It felt different than an app. There was context. Someone actually knew both people.",
   "I kept coming back to that feeling, and eventually built Orbit around it.",
@@ -29,8 +28,11 @@ export default function HomePage() {
 
       {/* Narrative */}
       <section className="pt-4 pb-16 px-5">
-        <div className="max-w-narrative-lg mx-auto space-y-6 text-lg leading-relaxed text-text-dark font-normal">
-          {NARRATIVE.map((paragraph, i) => (
+        <div className="max-w-narrative-lg mx-auto space-y-6 text-lg leading-[1.8] text-text-dark font-normal">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-text-dark leading-tight">
+            Orbit is a different kind of dating app.
+          </h1>
+          {NARRATIVE.slice(1).map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
           ))}
           <div className="flex justify-center pt-4">

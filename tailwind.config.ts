@@ -37,7 +37,7 @@ const config: Config = {
       },
       maxWidth: {
         narrative: "34rem",
-        "narrative-lg": "42.5rem", // ~680px for editorial column
+        "narrative-lg": "37.5rem", // 600px for editorial column
       },
       boxShadow: {
         subtle: "0 1px 3px rgba(0, 0, 0, 0.08)",
