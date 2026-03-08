@@ -1,21 +1,6 @@
 import Image from "next/image";
 import { INSTALL_URL } from "@/config";
 
-const NARRATIVE = [
-  "Orbit is a different kind of dating app.",
-  "Instead of singles swiping through strangers, friends introduce friends.",
-  "On most apps, you build your own profile and try to guess chemistry from photos and prompts. On Orbit, sponsors represent the singles they know. They create the profile, talk with other sponsors, and when both think it's a good fit, an introduction is made.",
-  "Singles aren't browsing the entire city. They're meeting someone who was thoughtfully introduced — with someone vouching for both sides.",
-  "The idea started simply. One night my wife came home excited because she had found a date for a friend of mine. Not through an app, but through a conversation with her friends about their friends.",
-  "They compared notes, talked about what each person was like, and decided to set them up.",
-  "It felt different than an app. There was context. Someone actually knew both people.",
-  "I kept coming back to that feeling, and eventually built Orbit around it.",
-  "Orbit isn't public or performative. Sponsors participate as connectors, not daters, and singles join through someone who knows them. The goal isn't quantity. It's the right introduction.",
-  "Orbit is just getting started. The first group of sponsors and singles will shape what this becomes.",
-  "If this feels like something you'd tell a friend about, you're probably exactly who this is for.",
-  "Request an invite and we'll reach out personally.",
-];
-
 export default function HomePage() {
   return (
     <div className="min-h-dvh bg-background-main text-text-dark">
@@ -32,15 +17,49 @@ export default function HomePage() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-text-dark leading-tight">
             Orbit is a different kind of dating app.
           </h1>
-          {NARRATIVE.slice(1).map((paragraph, i) => (
-            <p key={i}>{paragraph}</p>
-          ))}
+          <p>
+            Instead of singles swiping through strangers, friends introduce friends.
+          </p>
+          <p>
+            On most apps, you build your own profile and try to guess chemistry from photos and prompts.{" "}
+            <span className="text-xl font-bold italic">On Orbit, sponsors represent the singles they know.</span>{" "}
+            They create the profile, talk with other sponsors, and when both think it&apos;s a good fit, an introduction is made.
+          </p>
+          <p>
+            Singles aren&apos;t browsing the entire city. They&apos;re meeting someone who was thoughtfully introduced{" "}
+            <span className="text-xl font-bold italic">— with someone vouching for both sides.</span>
+          </p>
+          <p>
+            The idea started simply. One night my wife came home excited because she had found a date for a friend of mine. Not through an app, but through a conversation with her friends about their friends.
+          </p>
+          <p>
+            They compared notes, talked about what each person was like, and decided to set them up.
+          </p>
+          <p>
+            <span className="text-xl font-bold italic">It felt different than an app.</span> There was context. Someone actually knew both people.
+          </p>
+          <p>
+            I kept coming back to that feeling, and eventually built Orbit around it.
+          </p>
+          <p>
+            Orbit isn&apos;t public or performative. Sponsors participate as connectors, not daters, and singles join through someone who knows them.{" "}
+            <span className="text-xl font-bold italic">The goal isn&apos;t quantity. It&apos;s the right introduction.</span>
+          </p>
+          <p>
+            Orbit is just getting started. The first group of sponsors and singles will shape what this becomes.
+          </p>
+          <p>
+            If this feels like something you&apos;d tell a friend about, you&apos;re probably exactly who this is for.
+          </p>
+          <p>
+            Request an invite and we&apos;ll reach out personally.
+          </p>
           <div className="flex justify-center pt-4">
             <a
               href={INSTALL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full px-8 py-4 text-base font-medium bg-action-primary text-primary-blue border border-white transition-colors hover:bg-action-primary-hover focus:outline-none focus:ring-2 focus:ring-orbit-border focus:ring-offset-2 focus:ring-offset-background-main"
+              className="inline-flex items-center justify-center rounded-full px-10 py-4 text-base font-medium bg-white/10 text-white border border-white transition-all duration-150 hover:bg-white/15 hover:opacity-95 active:scale-[0.98] active:bg-white/20 focus:outline-none focus:ring-2 focus:ring-orbit-border focus:ring-offset-2 focus:ring-offset-background-main"
             >
               Visit Orbit
             </a>

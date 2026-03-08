@@ -25,6 +25,14 @@ export const palette = {
   border: {
     light: "rgba(55, 86, 120, 0.8)", // orbit-border
   },
+  gold: {
+    DEFAULT: "#D4B884", // orbit-gold (navy classic)
+    dark: "#BCA06E", // orbit-gold-dk
+    bright: "#E5D4A1", // brighter gold for hover border
+  },
+  invitation: {
+    bg: "#F4EDE4", // warm parchment / champagne
+  },
   action: {
     primary: "#FFFFFF",
     "primary-hover": "#F2F5FA",

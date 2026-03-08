@@ -21,10 +21,15 @@ const config: Config = {
           text2: palette.text.light,
           muted: palette.text.muted,
           border: "rgb(55 86 120 / <alpha-value>)",
+          gold: palette.gold.DEFAULT,
+          "gold-dark": palette.gold.dark,
+          "gold-bright": palette.gold.bright,
         },
+        invitation: palette.invitation,
       },
       fontFamily: {
         sans: [...fontStack],
+        invitation: ["Crimson Pro", "Georgia", "serif"],
         "orbit-heading": [
           "Bahnschrift Light",
           "Bahnschrift",
@@ -41,6 +46,7 @@ const config: Config = {
       },
       boxShadow: {
         subtle: "0 1px 3px rgba(0, 0, 0, 0.08)",
+        "invitation-glow": "0 0 24px rgba(212, 184, 132, 0.35)",
       },
       borderRadius: {
         xl: "0.75rem",
