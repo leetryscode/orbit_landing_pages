@@ -15,14 +15,14 @@ export default function HomePage() {
       <section className="pt-4 pb-16 px-5">
         <div className="max-w-narrative-lg mx-auto space-y-6 text-lg leading-[1.8] text-text-dark font-normal">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-text-dark leading-tight">
-            Orbit is a different kind of dating app.
+            Friends introduce friends.
           </h1>
           <p>
-            Instead of singles swiping through strangers, friends introduce friends.
+            Instead of swiping through strangers, singles are introduced by someone who actually knows them.
           </p>
           <p>
             On most apps, you build your own profile and try to guess chemistry from photos and prompts.{" "}
-            <span className="text-xl font-bold italic">On Orbit, sponsors represent the singles they know.</span>{" "}
+            <span className="text-xl font-bold italic">On Orbit, a sponsor represents the single they know.</span>{" "}
             They create the profile, talk with other sponsors, and when both think it&apos;s a good fit, an introduction is made.
           </p>
           <p>
@@ -36,7 +36,7 @@ export default function HomePage() {
             They compared notes, talked about what each person was like, and decided to set them up.
           </p>
           <p>
-            <span className="text-xl font-bold italic">It felt different than an app.</span> There was context. Someone actually knew both people.
+            <span className="text-xl font-bold italic">It felt different.</span> There was context. Someone actually knew both people.
           </p>
           <p>
             I kept coming back to that feeling, and eventually built Orbit around it.
