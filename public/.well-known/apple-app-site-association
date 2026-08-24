@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appID": "7VN35QQ8V7.com.susieslist.app",
+        "paths": ["/join/*"]
+      }
+    ]
+  }
+}
